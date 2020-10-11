@@ -1,6 +1,6 @@
 import { TextField } from "@material-ui/core/TextField";
 import React, { useState, useCallback } from "react";
-import {TextInput} from "../components/UIkit";
+import {PrimaryButton, TextInput} from "../components/UIkit";
 
 const SignUp = () => {
 
@@ -45,6 +45,13 @@ const SignUp = () => {
         fullWidth={true} label={"パスワード(確認用)"} multiline={false} required={true}
         rows={1} value={confirmPassword} type={"password"} onChange={inputConfirmPassword}
       />
+      <div className="module-spacer--medium" />
+      <div className="center">
+        <PrimaryButton
+          label={"アカウントを登録する"}
+          onClick={() => console.log("Clicked!")}
+        />
+      </div>
     </div>
   )
 }
