@@ -1,8 +1,11 @@
 import { TextField } from "@material-ui/core/TextField";
 import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {PrimaryButton, TextInput} from "../components/UIkit";
+import {signUp} from "../reducks/users/operations";
 
 const SignUp = () => {
+  const dispatch = useDispatch()
 
   const [username, setUsername]               = useState(""),
         [email, setEmail]                     = useState(""),
@@ -49,7 +52,7 @@ const SignUp = () => {
       <div className="center">
         <PrimaryButton
           label={"アカウントを登録する"}
-          onClick={() => console.log("Clicked!")}
+          onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
         />
       </div>
     </div>
