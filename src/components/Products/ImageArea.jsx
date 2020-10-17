@@ -3,6 +3,7 @@ import {storage} from "../../firebase/index";
 import {makeStyles} from "@material-ui/styles";
 import IconButton from "@material-ui/core/IconButton";
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import ImagePreview from "./ImagePreview";
 // import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles({
@@ -39,6 +40,11 @@ const ImageArea = (props) => {
 
   return (
     <div>
+      <div className="p-grid__list-images">
+        {props.images.length > 0 && (
+          props.images.map(image => <ImagePreview id={image.id} path={image.path} key={image.id} />)
+        )}
+      </div>
       <div className="u-text-right">
         <span>商品を登録する</span>
         <IconButton className={classes.icon}>
