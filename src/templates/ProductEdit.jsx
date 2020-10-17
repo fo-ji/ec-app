@@ -9,6 +9,7 @@ const ProductEdit = () => {
 
   const [name, setName]               = useState(""),
         [description, setDescription] = useState(""),
+        [images, setImages]           = useState(""),
         [category, setCategory]       = useState(""),
         [gender, setGender]           = useState(""),
         [price, setPrice]             = useState("");
