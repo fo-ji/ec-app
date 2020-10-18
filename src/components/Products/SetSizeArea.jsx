@@ -63,7 +63,12 @@ const SetSizeArea = (props) => {
     setIndex(index)
     setSize(size)
     setQuantity(quantity)
-  }
+  };
+
+  const deleteSize = (deleteIndex) => {
+    const newSizes = props.sizes.filter((item, i) => i !== deleteIndex);
+    props.setSizes(newSizes)
+  };
 
   return (
     <div>
@@ -89,7 +94,7 @@ const SetSizeArea = (props) => {
                     </IconButton>
                   </TableCell>
                   <TableCell>
-                    <IconButton className={classes.iconCell}>
+                    <IconButton className={classes.iconCell} onClick={() => deleteSize(i)}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
