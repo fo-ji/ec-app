@@ -1,9 +1,8 @@
-import React, {useState, useCallback, useEffect} from "react";
-import { useDispatch } from "react-redux";
-import { TextInput, SelectBox, PrimaryButton } from "../components/UIkit";
-import {saveProduct} from "../reducks/products/operations";
-// import ImageArea from "../components/Products/ImageArea";
+import React, { useState, useCallback, useEffect } from "react";
 import { db } from "../firebase/index";
+import { TextInput, SelectBox, PrimaryButton } from "../components/UIkit";
+import { useDispatch } from "react-redux";
+import { saveProduct } from "../reducks/products/operations";
 import { ImageArea, SetSizeArea } from "../components/Products";
 
 const ProductEdit = () => {
@@ -57,6 +56,7 @@ const ProductEdit = () => {
           setCategory(data.category);
           setGender(data.gender);
           setPrice(data.price);
+          setSizes(data.sizes);
         })
     }
   }, [id]);
@@ -90,7 +90,7 @@ const ProductEdit = () => {
         <div className="center">
           <PrimaryButton
             label={"商品情報を保存"}
-            onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images))}
+            onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images, sizes))}
           />
         </div>
       </div>
