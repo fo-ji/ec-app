@@ -1,4 +1,5 @@
-import React, { useStyles, useCallback } from "react"
+import React, { useState, useCallback } from "react"
+import { useDispatch } from "react-redux"
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -13,6 +14,8 @@ import HistoryIcon from '@material-ui/icons/History';
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { TextInput } from "../UIkit";
+import { push } from "connected-react-router"
+import { sighOut, signOut } from "../../reducks/users/operations"
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -35,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const ClosableDrawer = (props) => {
   const classes = useStyles()
   const {container} = props
+  const dispatch = useDispatch()
 
   const [keyword, setKeyword] = useState("")
 
@@ -42,6 +46,16 @@ const ClosableDrawer = (props) => {
     setKeyword(e.target.value)
   }, [setKeyword])
 
+  const selectMenu = (e, path) => {
+    dispatch(push(path))
+    props.onClose(e)
+  }
+
+  const menus = [
+    {func: selectMenu, label: "商品登録", icon: <AddCircleIcon />, id: "register", value: "/product/edit"},
+    {func: selectMenu, label: "注文履歴", icon: <HistoryIcon />, id: "history", value: "/order/history"},
+    {func: selectMenu, label: "プロフィール", icon: <PersonIcon />, id: "profile", value: "/user/mypage"},
+  ]
 
   return (
     <nav className={classes.drawer}>
@@ -50,7 +64,7 @@ const ClosableDrawer = (props) => {
         variant="temporary"
         anchor="right"
         open={props.open}
-        onClose={(e) => props.onCloseI(e)}
+        onClose={(e) => props.onClose(e)}
         classes={{paper: classes.drawerPaper}}
         ModalProps={{keepMounted: true}}
       >
@@ -66,11 +80,18 @@ const ClosableDrawer = (props) => {
           </div>
           <Divider />
           <List>
-            <ListItem button key="logout">
+            {menus.map(menu => (
+              <ListItem button key={menu.id} onClick={(e) => menu.func(e, menu.value)}>
+                <ListItemIcon>
+                  <ListItemText primary={menu.label} />
+                </ListItemIcon>
+              </ListItem>
+            ))}
+            <ListItem button key="logout" onClick={() => dispatch(signOut())}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText primary={"Login"} />
+              <ListItemText primary={"Logout"} />
             </ListItem>
           </List>
         </div>
