@@ -48,7 +48,7 @@ const returnCodeToBr = (text) => {
 const ProductDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const selector = useSelector((state) => state);
+  const selector = useSelector(state => state);
   const path = selector.router.location.pathname;
   const id = path.split("/product/")[1];
 
@@ -69,7 +69,7 @@ const ProductDetail = () => {
       description: product.description,
       gender: product.gender,
       images: product.images,
-      name: product.images,
+      name: product.name,
       price: product.price,
       productId: product.id,
       quantity: 1,

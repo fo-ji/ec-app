@@ -7,6 +7,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { getProductsInCart, getUserId } from "../../reducks/users/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase/index"
+import { fetchProductsInCart } from "../../reducks/users/operations"
 
 const HeaderMenus = (props) => {
   const dispatch = useDispatch()
@@ -19,21 +20,21 @@ const HeaderMenus = (props) => {
       .onSnapshot(snapshots => {
         snapshots.docChanges().forEach(change => {
           const product = change.doc.data()
-          const changeType = change.type()
+          const changeType = change.type
 
           switch (changeType) {
             case "added":
               productsInCart.push(product)
-              break
+              break;
             case "modified":
               const index = productsInCart.findIndex(product => product.cartId === change.doc.id)
               productsInCart[index] = product
-              break
+              break;
             case "removed":
               productsInCart = productsInCart.filter(product => product.cartId !== change.doc.id)
               break
             default:
-              break
+              break;
           }
         })
 
