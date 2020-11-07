@@ -20,7 +20,7 @@ export const fetchOrdersHistory = () => {
 
     db.collection("users").doc(uid)
       .collection("orders")
-      .orderBy("update_at", "desc")
+      .orderBy("updated_at", "desc")
       .get()
       .then((snapshots) => {
         snapshots.forEach(snapshot => {
