@@ -15,7 +15,8 @@ const ProductList = () => {
 
   useEffect(() => {
     dispatch(fetchProducts(gender, category))
-  }, [])
+  }, [query])
+
   return (
     <section className="c-section-wrapin">
       <div className="p-grid__row">
